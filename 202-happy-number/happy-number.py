@@ -1,18 +1,19 @@
 class Solution:
     def isHappy(self, n: int) -> bool:
-        def get_squared_sum(num):
+        fast, slow = n, n
+        def get_squared_sum(n):
             total = 0
-            while num > 0:
-                digit = num % 10
+            while (n>0):
+                digit = n % 10
                 total += digit * digit
-                num = num//10
+                n //= 10
             return total
+        
+        while True:
+            slow = get_squared_sum(slow)
+            fast = get_squared_sum(get_squared_sum(fast))
 
-        seen = set()
-
-        while n != 1 and n not in seen:
-            seen.add(n)
-            n = get_squared_sum(n)
-
-
-        return n == 1
+            if slow == 1 or fast == 1:
+                return True
+            if slow == fast:
+                return False
