@@ -1,26 +1,23 @@
 class Solution:
     def threeSumClosest(self, nums: List[int], target: int) -> int:
+        closestSum = math.inf
         nums.sort()
-        small_diff = math.inf
 
         for i in range(len(nums) - 2):
-            left = i + 1
-            right = len(nums) - 1
-
-            while left < right:
-                currSum = nums[i] + nums[left] + nums[right]
+            l = i + 1
+            r = len(nums) - 1
+             
+            while l < r:
+                currSum = nums[i] + nums[l] + nums[r]
                 target_diff = target - currSum
+
                 if target_diff == 0:
                     return currSum
-
-                if abs(small_diff) >= abs(target_diff):
-                    small_diff = target_diff
-
-                if target_diff > 0:
-                    left += 1
-                else:
-                    right -= 1
-
-        return target - small_diff
-            
-
+                if abs(closestSum) >= abs(target_diff):
+                    closestSum = target_diff
+                
+                if target_diff < 0:
+                    r -= 1
+                else: 
+                    l += 1
+        return target - closestSum
