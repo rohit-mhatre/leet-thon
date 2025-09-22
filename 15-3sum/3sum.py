@@ -6,25 +6,23 @@ class Solution:
         for i in range(len(nums)):
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
-            left = i + 1
-            right = len(nums) - 1
-            while left < right:
-                current_sum = nums[left] + nums[right] + nums[i]
 
-                if current_sum == 0:
-                    res.append([nums[i], nums[left], nums[right]])
-
-                    while left < right and nums[left] == nums[left + 1]:
-                        left += 1
-                    while left < right and nums[right] == nums[right - 1]:
-                        right -= 1
-
-                    left += 1
-                    right -= 1
-
-                elif current_sum > 0:
-                    right -= 1
+            l,r = i+1, len(nums) -1
+            while l < r:
+                if nums[i]+nums[l]+nums[r] == 0:
+                    res.append([nums[i],nums[l],nums[r]])
+                    while l<r and nums[l] == nums[l+1]:
+                        l +=1
+                    while l<r and nums[r] == nums[r-1]:
+                        r-=1
+                    l+=1
+                    r-=1
+                elif nums[i]+nums[l]+nums[r] < 0:
+                    l += 1
                 else:
-                    left += 1
+                    r -= 1
+            
         return res
-                        
+
+
+        
