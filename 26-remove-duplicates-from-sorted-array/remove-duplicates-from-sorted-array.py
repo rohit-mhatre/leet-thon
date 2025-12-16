@@ -1,10 +1,13 @@
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        if not nums:
+        if len(nums) == 0:
             return 0
-        slow = 0
-        for fast in range(1, len(nums)):
-            if nums[slow] != nums[fast]:
-                slow += 1
-                nums[slow] = nums[fast]
-        return slow + 1
+
+        writePos = 0
+
+        for readPos in range(1,len(nums)):
+            if nums[readPos] != nums[writePos]:
+                writePos += 1
+                nums[writePos] = nums[readPos]
+            
+        return writePos + 1
